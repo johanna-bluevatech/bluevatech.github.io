@@ -97,6 +97,17 @@
   margin: 0;
 }
 
+/* ---- Service Block Intro ---- */
+.service-block-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin-bottom: 20px;
+}
+.service-block-intro .card-link {
+  font-weight: 600;
+}
+
 /* ---- CTA Section ---- */
 .services-cta {
   background: var(--gray-50);
