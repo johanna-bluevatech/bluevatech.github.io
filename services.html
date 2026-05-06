@@ -295,8 +295,12 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.01, rootMargin: '0px 0px 50px 0px' });
       sections.forEach(function (s) { observer.observe(s); });
+      // Safety: force-show after 2s in case observer fails on mobile
+      setTimeout(function () {
+        sections.forEach(function (s) { s.classList.add('is-visible'); });
+      }, 2000);
     })();
   </script>
 
