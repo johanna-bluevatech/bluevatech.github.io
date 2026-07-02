@@ -27,6 +27,7 @@
 
 html { scroll-behavior: auto; }
 html:focus-within { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
 section[id] { scroll-margin-top: 110px; }
 
 body {
@@ -35,7 +36,13 @@ body {
   line-height: 1.6;
   background: var(--white);
   animation: page-fade-in 0.5s ease-out;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+/* Sticky footer: on short pages the footer is pushed to the bottom
+   instead of sitting in the middle of the viewport. */
+.footer { margin-top: auto; }
 
 @keyframes page-fade-in {
   from { opacity: 0; }
@@ -775,19 +782,77 @@ p { color: var(--gray-600); }
 }
 .footer-links a:hover { color: var(--white); }
 
+/* ---- Social links ---- */
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--gray-200);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: color 0.2s, background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.social-links a:hover {
+  color: var(--white);
+  background: var(--blue-500);
+  border-color: var(--blue-500);
+  transform: translateY(-2px);
+}
+.social-links svg { width: 18px; height: 18px; display: block; }
+
+/* Light variant for use on light backgrounds (e.g. contact section) */
+.social-links--light a {
+  color: var(--blue-700);
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+}
+.social-links--light a:hover {
+  color: var(--white);
+  background: var(--blue-500);
+  border-color: var(--blue-500);
+}
+.contact-socials { margin-top: 28px; }
+.contact-socials .social-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   h1 { font-size: 2.2rem; }
   .nav-links {
     display: none;
     flex-direction: column;
+    align-items: stretch;
     position: absolute;
     top: 56px; left: 0; width: 100%;
     background: var(--blue-900);
-    padding: 16px 24px;
-    gap: 16px;
+    padding: 12px 24px 16px;
+    gap: 4px;
+    max-height: calc(100vh - 56px);
+    overflow-y: auto;
   }
   .nav-links.open { display: flex; }
+  .nav-links > li { width: 100%; }
+  .nav-links > li > a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
   .mobile-toggle { display: block; }
   .nav-dropdown { width: 100%; }
   .nav-dropdown > a { width: 100%; justify-content: space-between; }
@@ -804,7 +869,18 @@ p { color: var(--gray-600); }
   .nav-dropdown:hover .nav-dropdown-menu { display: none; }
   .nav-dropdown.open .nav-dropdown-menu { display: block; }
   .form-row { flex-direction: column; }
-  .hero { min-height: 100vh; }
+  .hero {
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    padding: 84px 0 0;
+  }
+  .hero-content { padding-bottom: 32px; }
+  /* Put the trust strip in normal flow so it can't overlap the hero buttons */
+  .trust-strip {
+    position: static;
+    margin-top: auto;
+  }
   .trust-strip-inner {
     flex-direction: column;
     gap: 12px;
@@ -818,6 +894,12 @@ p { color: var(--gray-600); }
     text-align: center;
   }
   .footer-links {
+    justify-content: center;
+  }
+  .footer-socials {
+    justify-content: center;
+  }
+  .contact-info .social-links {
     justify-content: center;
   }
 }
