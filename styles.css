@@ -1,6 +1,11 @@
 /* ---- Reset & Base ---- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+@font-face {
+  font-family: "Gyrotrope";
+  src: url(assets/fonts/Gyrotrope-ExtraBold.otf);
+}
+
 :root {
   --blue-900: #091729;
   --blue-800: #0b1d3a;
@@ -146,6 +151,7 @@ p { color: var(--gray-600); }
 }
 .logo-img { height: 20px; max-height: 20px; width: auto; max-width: 30px; object-fit: contain; }
 .logo-text {
+  font-family: "Gyrotrope";
   display: flex;
   align-items: baseline;
   gap: 6px;
